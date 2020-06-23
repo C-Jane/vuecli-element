@@ -1,0 +1,235 @@
+//随机数字
+@function parse-random($value) {
+@return round(random() * $value);
+}
+$randomId: parse-random(1000000);
+
+$spriteSrc: "~@/assets/css/sprite.png?v=1592885672000";
+$spriteWidth: 399px;
+$spriteHeight: 374px;
+  $add: 0px -222px 64px 64px;
+  $addFllow: -192px -189px 17px 16px;
+  $addType: -260px -222px 26px 33px;
+  $arrow-lift: -170px -105px 80px 80px;
+  $arrow-right: -86px -105px 80px 80px;
+  $back: 0px -338px 21px 36px;
+  $close-img: 0px -105px 82px 80px;
+  $close: -298px -175px 45px 44px;
+  $comment-0: -362px -112px 32px 32px;
+  $comment-tit: 0px -189px 160px 29px;
+  $del-0: -182px -290px 22px 22px;
+  $del-1: -362px -286px 28px 32px;
+  $del: 0px -290px 44px 44px;
+  $erro-0: -298px -223px 44px 44px;
+  $erro: -164px -189px 24px 21px;
+  $fb-0: -362px -38px 32px 33px;
+  $fb-1: -362px -75px 32px 33px;
+  $game: -96px -290px 26px 32px;
+  $good-0: -362px -220px 32px 29px;
+  $good-1: -362px -253px 32px 29px;
+  $home-0: -252px -59px 37px 36px;
+  $home-1: -254px -105px 37px 36px;
+  $msg: -48px -290px 44px 32px;
+  $my-0: -362px 0px 37px 34px;
+  $my-1: -254px -145px 37px 34px;
+  $myId: -132px 0px 162px 42px;
+  $myScore: 0px -59px 162px 42px;
+  $pic-0: -68px -222px 60px 60px;
+  $pic-1: -132px -222px 60px 60px;
+  $play: -298px -117px 42px 54px;
+  $search-1: -166px -59px 39px 39px;
+  $search: -209px -59px 39px 39px;
+  $star-0: -362px -184px 32px 32px;
+  $star-1: -362px -148px 32px 32px;
+  $tianmei-logo: 0px 0px 128px 55px;
+  $tianmeiIcon: -298px -58px 48px 55px;
+  $video-0: -196px -222px 60px 54px;
+  $video-1: -298px 0px 60px 54px;
+  $vip: -156px -290px 22px 31px;
+  $work: -126px -290px 26px 32px;
+
+@function px2rem ($px) {
+@if (type-of($px) == "number") {
+@return $px / 100px * 1rem;
+}
+@if (type-of($px) == "list") {
+@if (nth($px, 1) == 0 and nth($px, 2) != 0) {
+@return 0 nth($px, 2) / 100px * 1rem;
+} @else if (nth($px, 1) == 0 and nth($px, 2) == 0)  {
+@return 0 0;
+} @else if (nth($px, 1) != 0 and nth($px, 2) == 0) {
+@return nth($px, 1) /100px * 1rem 0;
+} @else {
+@return nth($px, 1) / 100px *1rem nth($px, 2) / 100px * 1rem;
+}
+}
+}
+
+@function strip-units($number){
+@return $number / ($number * 0 + 1);
+}
+
+@function format-zero($number){
+@if $number == 0 {
+@return 1;
+}@else{
+@return $number;
+}
+}
+
+@mixin sprite-width($sprite, $precision) {
+@if $precision {
+width: px2rem(nth($sprite, 3));
+}@else{
+width: px2rem(nth($sprite, 3) + 2px);
+}
+
+}
+
+@mixin sprite-height($sprite, $precision) {
+@if $precision {
+height: px2rem(nth($sprite, 4));
+}@else{
+height: px2rem(nth($sprite, 4) + 2px);
+}
+}
+
+@mixin sprite-position($sprite, $precision) {
+@if $precision {
+background-position: strip-units(nth($sprite, 1)) / strip-units(nth($sprite, 3) - $spriteWidth) * 100%  strip-units(nth($sprite, 2)) / format-zero(strip-units(nth($sprite, 4) - $spriteHeight)) * 100%;
+}@else{
+background-position: strip-units(nth($sprite, 1)) / strip-units(nth($sprite, 3) + 1 - $spriteWidth) * 100%  strip-units(nth($sprite, 2)) / format-zero(strip-units(nth($sprite, 4) + 1 - $spriteHeight)) * 100%;
+}
+}
+
+@mixin sprite($sprite, $precision) {
+@include sprite-position($sprite, $precision);
+@include sprite-width($sprite, $precision);
+@include sprite-height($sprite, $precision);
+background-image: url('#{$spriteSrc}');
+background-repeat: no-repeat;
+background-size: px2rem(($spriteWidth, $spriteHeight));
+display: inline-block;
+}
+
+
+  @mixin mix-add() {
+  @include sprite($add, $precision: false);
+  }
+  @mixin mix-addFllow() {
+  @include sprite($addFllow, $precision: false);
+  }
+  @mixin mix-addType() {
+  @include sprite($addType, $precision: false);
+  }
+  @mixin mix-arrow-lift() {
+  @include sprite($arrow-lift, $precision: false);
+  }
+  @mixin mix-arrow-right() {
+  @include sprite($arrow-right, $precision: false);
+  }
+  @mixin mix-back() {
+  @include sprite($back, $precision: false);
+  }
+  @mixin mix-close-img() {
+  @include sprite($close-img, $precision: false);
+  }
+  @mixin mix-close() {
+  @include sprite($close, $precision: false);
+  }
+  @mixin mix-comment-0() {
+  @include sprite($comment-0, $precision: false);
+  }
+  @mixin mix-comment-tit() {
+  @include sprite($comment-tit, $precision: false);
+  }
+  @mixin mix-del-0() {
+  @include sprite($del-0, $precision: false);
+  }
+  @mixin mix-del-1() {
+  @include sprite($del-1, $precision: false);
+  }
+  @mixin mix-del() {
+  @include sprite($del, $precision: false);
+  }
+  @mixin mix-erro-0() {
+  @include sprite($erro-0, $precision: false);
+  }
+  @mixin mix-erro() {
+  @include sprite($erro, $precision: false);
+  }
+  @mixin mix-fb-0() {
+  @include sprite($fb-0, $precision: false);
+  }
+  @mixin mix-fb-1() {
+  @include sprite($fb-1, $precision: false);
+  }
+  @mixin mix-game() {
+  @include sprite($game, $precision: false);
+  }
+  @mixin mix-good-0() {
+  @include sprite($good-0, $precision: false);
+  }
+  @mixin mix-good-1() {
+  @include sprite($good-1, $precision: false);
+  }
+  @mixin mix-home-0() {
+  @include sprite($home-0, $precision: false);
+  }
+  @mixin mix-home-1() {
+  @include sprite($home-1, $precision: false);
+  }
+  @mixin mix-msg() {
+  @include sprite($msg, $precision: false);
+  }
+  @mixin mix-my-0() {
+  @include sprite($my-0, $precision: false);
+  }
+  @mixin mix-my-1() {
+  @include sprite($my-1, $precision: false);
+  }
+  @mixin mix-myId() {
+  @include sprite($myId, $precision: false);
+  }
+  @mixin mix-myScore() {
+  @include sprite($myScore, $precision: false);
+  }
+  @mixin mix-pic-0() {
+  @include sprite($pic-0, $precision: false);
+  }
+  @mixin mix-pic-1() {
+  @include sprite($pic-1, $precision: false);
+  }
+  @mixin mix-play() {
+  @include sprite($play, $precision: false);
+  }
+  @mixin mix-search-1() {
+  @include sprite($search-1, $precision: false);
+  }
+  @mixin mix-search() {
+  @include sprite($search, $precision: false);
+  }
+  @mixin mix-star-0() {
+  @include sprite($star-0, $precision: false);
+  }
+  @mixin mix-star-1() {
+  @include sprite($star-1, $precision: false);
+  }
+  @mixin mix-tianmei-logo() {
+  @include sprite($tianmei-logo, $precision: false);
+  }
+  @mixin mix-tianmeiIcon() {
+  @include sprite($tianmeiIcon, $precision: false);
+  }
+  @mixin mix-video-0() {
+  @include sprite($video-0, $precision: false);
+  }
+  @mixin mix-video-1() {
+  @include sprite($video-1, $precision: false);
+  }
+  @mixin mix-vip() {
+  @include sprite($vip, $precision: false);
+  }
+  @mixin mix-work() {
+  @include sprite($work, $precision: false);
+  }
